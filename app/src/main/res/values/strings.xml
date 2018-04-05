@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Order Food</string>
+    <string name="mon_an">Món ăn</string>
+    <string name="ban_an">Bàn ăn</string>
+    <string name="userName">hu_trung</string>
+    <string name="avatart_text">T</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+</resources>
