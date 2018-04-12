@@ -182,7 +182,7 @@ public class Employee implements Serializable{
         this.status = status;
     }
 
-    public String fullName(){
+    public String getFullName(){
         return firstName + " " + lastName;
     }
 }

@@ -15,7 +15,6 @@ import com.trungnguyeen.orderfood.data.model.Employee;
 import com.trungnguyeen.orderfood.features.view.activity.HomeActivity;
 import com.trungnguyeen.orderfood.login.presenter.LoginPresenter;
 import com.trungnguyeen.orderfood.login.presenter.LoginViewListener;
-import com.trungnguyeen.orderfood.utilities.Constants;
 
 public class LoginActivity extends AppCompatActivity implements LoginViewListener {
 
@@ -60,7 +59,6 @@ public class LoginActivity extends AppCompatActivity implements LoginViewListene
     @Override
     public void onLoginSuccess(Employee employee) {
         Intent intent = new Intent(this, HomeActivity.class);
-        intent.putExtra(Constants.EMPLOYEE, employee);
         Log.i(TAG, "onLoginSuccess: " + employee.getLastName());
         startActivity(intent);
         finish();

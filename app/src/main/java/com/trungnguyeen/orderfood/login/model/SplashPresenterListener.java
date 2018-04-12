@@ -6,5 +6,5 @@ package com.trungnguyeen.orderfood.login.model;
 
 public interface SplashPresenterListener {
     void loggedin();
-    void noLogin();
+    void noLogin(int responseCode);
 }

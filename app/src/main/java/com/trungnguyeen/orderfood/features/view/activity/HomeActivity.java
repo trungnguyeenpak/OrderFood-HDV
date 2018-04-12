@@ -25,17 +25,20 @@ import com.trungnguyeen.orderfood.data.model.SingletonUser;
 import com.trungnguyeen.orderfood.features.view.fragment.FoodFragment;
 import com.trungnguyeen.orderfood.features.view.fragment.TableFragment;
 import com.trungnguyeen.orderfood.login.view.LoginActivity;
-import com.trungnguyeen.orderfood.utilities.Constants;
+import com.trungnguyeen.orderfood.utils.Constants;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private final static String TAG = HomeActivity.class.getSimpleName();
+    //Var of controls
     private Toolbar mToolbar;
     private BottomNavigationView bottomNavigationView;
     private NavigationView nav_left;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private TextView mUsername;
+
+    //Var of dev
+    private final static String TAG = HomeActivity.class.getSimpleName();
     private Employee mEmployee;
     private SingletonUser mUser = SingletonUser.getInstance();
     private boolean doubleBackToExit = false;
@@ -48,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
         //loading the default fragment
         loadFragment(new FoodFragment());
         mEmployee = mUser.getEmployee();
+        Log.i(TAG, "onCreate: Employee " + mEmployee.getFullName());
         setupToolbar();
         setupNavigationLeft();
         setupDrawerLayout();
@@ -61,8 +65,9 @@ public class HomeActivity extends AppCompatActivity {
         mUsername = hView.findViewById(R.id.userName);
         Log.i(TAG, "setupNavigationLeft: " + mUsername.getText());
         if (mEmployee != null){
-            mUsername.setText(mEmployee.fullName());
+            mUsername.setText(mEmployee.getFullName());
         }
+
         nav_left.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -76,7 +81,6 @@ public class HomeActivity extends AppCompatActivity {
                         finish();
                         break;
                 }
-                mDrawerLayout.closeDrawers();  // CLOSE DRAWER
                 return true;
             }
         });

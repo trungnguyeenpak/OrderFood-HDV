@@ -16,10 +16,10 @@ import retrofit2.http.Path;
 public interface SOService {
 
     @FormUrlEncoded
-    @POST("/auth/login.json?")
+    @POST("auth/login.json?")
     Call<EmployeeResponse> userlogin(@Field("userName") String username,
                                      @Field("password") String password);
 
-    @GET("/employee/{userID}.json")
+    @GET("employee/{userID}.json")
     Call<EmployeeResponse> getUserInfo(@Path("userID") int userID);
 }

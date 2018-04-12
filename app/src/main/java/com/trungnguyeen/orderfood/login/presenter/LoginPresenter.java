@@ -39,8 +39,8 @@ public class LoginPresenter implements SplashPresenterListener, LoginPresenterLi
     }
 
     @Override
-    public void noLogin() {
-        splashCallback.noLogin();
+    public void noLogin(int responseCode) {
+        splashCallback.noLogin(responseCode);
     }
 
 

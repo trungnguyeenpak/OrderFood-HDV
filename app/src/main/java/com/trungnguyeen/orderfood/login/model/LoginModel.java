@@ -4,12 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.trungnguyeen.orderfood.data.model.Employee;
 import com.trungnguyeen.orderfood.data.model.SingletonUser;
 import com.trungnguyeen.orderfood.data.model.response.EmployeeResponse;
 import com.trungnguyeen.orderfood.data.remote.SOService;
-import com.trungnguyeen.orderfood.utilities.ApiUtils;
-import com.trungnguyeen.orderfood.utilities.Constants;
+import com.trungnguyeen.orderfood.utils.ApiUtils;
+import com.trungnguyeen.orderfood.utils.Constants;
 
 import java.io.IOException;
 
@@ -44,32 +45,17 @@ public class LoginModel {
         SharedPreferences preferences = context.getSharedPreferences(
                 Constants.KEY_PREFERENCES, Context.MODE_PRIVATE);
 
-        int user_token = preferences.getInt(Constants.USER_TOKEN, 0);
-        Log.i("TAG", "handleCheckLogin: " + user_token);
-        if (user_token != 0){ //Neu da dang nhap, get thong tin user tu server
-            service.getUserInfo(user_token).enqueue(new Callback<EmployeeResponse>() {
-                @Override
-                public void onResponse(Call<EmployeeResponse> call, Response<EmployeeResponse> response) {
-                    if(response.isSuccessful()){
-                        EmployeeResponse employeeResponse = response.body();
-                        Employee employee = employeeResponse.getData();
-                        mUser.setEmployee(employee);
-                        splashCallback.loggedin();
-                        Log.i(TAG, "onResponse: " + employee);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<EmployeeResponse> call, Throwable t) {
-                    Log.e(TAG, "onFailure: " + t.getMessage());
-                    splashCallback.noLogin();
-                }
-            });
+        Gson gson = new Gson();
+        String json = preferences.getString(Constants.SHARE_PREF_USER, null);
+        Log.e("TAG", "handleCheckLogin: " + json);
+        if (json == null) {
+            splashCallback.noLogin(Constants.NO_LOGIN_CODE);
+            return;
         }
-        else{
-            splashCallback.noLogin();
-        }
-
+        Employee employee = gson.fromJson(json, Employee.class);
+        mUser.setEmployee(employee);
+        splashCallback.loggedin();
+        Log.i(TAG, "onResponse: " + employee);
     }
 
     public void handleLogin(String username, String password) {
@@ -82,7 +68,7 @@ public class LoginModel {
                     if (employeeResponse.getStatus() == Constants.STATUS_REST_DATA) {
                         Employee employee = employeeResponse.getData();
                         employee = employeeResponse.getData();
-                        writeUserToken(employee.getId());
+                        saveSharePrefWithEmployee(employee);
                         mUser.setEmployee(employee);
                         loginCallback.onLoginSuccess(employee);
                     } else {
@@ -97,7 +83,6 @@ public class LoginModel {
                     loginCallback.onLoginFailed();
                 }
             }
-
             @Override
             public void onFailure(Call<EmployeeResponse> call, Throwable t) {
                 loginCallback.onLoginFailed();
@@ -106,12 +91,15 @@ public class LoginModel {
         });
     }
 
-    private void writeUserToken(int userToken) {
+    private void saveSharePrefWithEmployee(Employee employee) {
         SharedPreferences.Editor editor = context.getSharedPreferences(
                 Constants.KEY_PREFERENCES, context.MODE_PRIVATE).edit();
-        editor.putInt(Constants.USER_TOKEN, userToken);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(employee);
+        editor.putString(Constants.SHARE_PREF_USER, json);
         editor.apply();
-        Log.i(TAG, "readUserToken: ghi thanh cong " + userToken);
+        Log.i(TAG, "readUserToken: ghi thanh cong " + employee);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.trungnguyeen.orderfood.utilities;
+package com.trungnguyeen.orderfood.utils;
 
 import com.trungnguyeen.orderfood.data.remote.RetrofitClient;
 import com.trungnguyeen.orderfood.data.remote.SOService;
@@ -8,7 +8,7 @@ import com.trungnguyeen.orderfood.data.remote.SOService;
  */
 
 public class ApiUtils {
-    public static final String BASE_URL = "http://orderfood1.kilatiron.com";
+    public static final String BASE_URL = "http://192.168.1.192:8081/OrderFood/";
 
     public static SOService getSOService() {
         return RetrofitClient.getRetrofitClient(BASE_URL).create(SOService.class);

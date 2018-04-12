@@ -6,18 +6,19 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.trungnguyeen.orderfood.R;
 import com.trungnguyeen.orderfood.features.view.activity.HomeActivity;
 import com.trungnguyeen.orderfood.login.presenter.LoginPresenter;
 import com.trungnguyeen.orderfood.login.presenter.SplashViewListener;
+import com.trungnguyeen.orderfood.utils.Constants;
 
 public class SplashscreenActivity extends AppCompatActivity implements SplashViewListener {
 
 
     private static final String TAG = SplashscreenActivity.class.getSimpleName();
     private ProgressBar mProgressBar;
-
     private LoginPresenter mLoginPresenter;
 
     @Override
@@ -56,18 +57,35 @@ public class SplashscreenActivity extends AppCompatActivity implements SplashVie
     }
 
     @Override
-    public void noLogin() {
-        Log.i(TAG, "noLogin: noLogin");
-        new CountDownTimer(1100, 1000) {
-            public void onTick(long millisUntilFinished) {
+    public void noLogin(int responseCode) {
+        if(responseCode == Constants.SERVICE_ERROR_CODE){
+            Toast.makeText(this, "No Service", Toast.LENGTH_SHORT).show();
+            new CountDownTimer(3000, 1000){
+                @Override
+                public void onFinish() {
+                    Toast.makeText(SplashscreenActivity.this, "No service", Toast.LENGTH_SHORT).show();
+                    finish();
+                    System.exit(0);
+                }
+                @Override
+                public void onTick(long millisUntilFinished) {
 
-            }
-            public void onFinish() {
-                Intent homeIntent = new Intent(SplashscreenActivity.this, LoginActivity.class);
-                startActivity(homeIntent);
-                finish();
-            }
-        }.start();
+                }
+            }.start();
+        }
+        else {
+            Log.i(TAG, "noLogin: noLogin");
+            new CountDownTimer(1100, 1000) {
+                public void onTick(long millisUntilFinished) {
+
+                }
+                public void onFinish() {
+                    Intent homeIntent = new Intent(SplashscreenActivity.this, LoginActivity.class);
+                    startActivity(homeIntent);
+                    finish();
+                }
+            }.start();
+        }
     }
 
 }

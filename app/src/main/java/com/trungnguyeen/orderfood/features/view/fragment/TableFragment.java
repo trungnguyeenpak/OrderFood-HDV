@@ -18,6 +18,8 @@ public class TableFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_table, null);
+        View view = inflater.inflate(R.layout.fragment_table, null);
+
+        return view;
     }
 }
