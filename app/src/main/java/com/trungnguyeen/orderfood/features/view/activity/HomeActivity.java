@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,12 +24,13 @@ import android.widget.Toast;
 import com.trungnguyeen.orderfood.R;
 import com.trungnguyeen.orderfood.data.model.Employee;
 import com.trungnguyeen.orderfood.data.model.SingletonUser;
+import com.trungnguyeen.orderfood.design_supporter.CustomViewPager;
 import com.trungnguyeen.orderfood.features.view.fragment.FoodFragment;
 import com.trungnguyeen.orderfood.features.view.fragment.TableFragment;
 import com.trungnguyeen.orderfood.login.view.LoginActivity;
 import com.trungnguyeen.orderfood.utils.Constants;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity{
 
     //Var of controls
     private Toolbar mToolbar;
@@ -36,12 +39,16 @@ public class HomeActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private TextView mUsername;
+    private CustomViewPager viewPager;
 
     //Var of dev
     private final static String TAG = HomeActivity.class.getSimpleName();
     private Employee mEmployee;
     private SingletonUser mUser = SingletonUser.getInstance();
     private boolean doubleBackToExit = false;
+    private Fragment foodFragment = new FoodFragment();
+    private Fragment tableFragment = new TableFragment();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +56,59 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         //loading the default fragment
-        loadFragment(new FoodFragment());
+        //loadFragment(new FoodFragment());
         mEmployee = mUser.getEmployee();
         Log.i(TAG, "onCreate: Employee " + mEmployee.getFullName());
         setupToolbar();
+        setupViewPager();
+        setupBottomNavigation();
         setupNavigationLeft();
         setupDrawerLayout();
-        setupBottomNavigation();
 
+    }
+
+    private void setupViewPager() {
+        viewPager = findViewById(R.id.viewPager);
+        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                switch (position) {
+                    case 0:
+                        return foodFragment;
+                    case 1:
+                        return tableFragment;
+                }
+                return null;
+            }
+
+            @Override
+            public int getCount() {
+                return 2;
+            }
+        });
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                bottomNavigationView.getMenu().getItem(position).setChecked(true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        viewPager.setPagingEnabled(false);
+    }
+
+    private void setupBottomNavigation() {
+        bottomNavigationView = findViewById(R.id.nav_bottom);
+        bottomNavigationView.setOnNavigationItemSelectedListener(mBottomNavListener);
     }
 
     private void setupNavigationLeft() {
@@ -64,14 +116,14 @@ public class HomeActivity extends AppCompatActivity {
         View hView = nav_left.getHeaderView(0);
         mUsername = hView.findViewById(R.id.userName);
         Log.i(TAG, "setupNavigationLeft: " + mUsername.getText());
-        if (mEmployee != null){
+        if (mEmployee != null) {
             mUsername.setText(mEmployee.getFullName());
         }
 
         nav_left.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.logout:
                         Log.i("TAG", "onNavigationItemSelected: Logout");
                         SharedPreferences prefer = getSharedPreferences(Constants.KEY_PREFERENCES, Context.MODE_PRIVATE);
@@ -95,38 +147,18 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    private void setupBottomNavigation() {
-        bottomNavigationView = findViewById(R.id.nav_bottom);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment = null;
 
-                switch (item.getItemId()) {
-                    case R.id.action_foos:
-                        fragment = new FoodFragment();
-                        break;
 
-                    case R.id.action_table:
-                        fragment = new TableFragment();
-                        break;
-                }
-                return loadFragment(fragment);
-            }
-        });
-    }
-
-    private boolean loadFragment(Fragment fragment) {
-        //switching fragment
-        if (fragment != null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.view_container, fragment)
-                    .commit();
+    private BottomNavigationView.OnNavigationItemSelectedListener mBottomNavListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Log.i(TAG, "onNavigationItemSelected: id " + item.getItemId());
+            viewPager.setCurrentItem(item.getOrder());
             return true;
         }
-        return false;
-    }
+    };
+
 
     private void setupToolbar() {
         mToolbar = findViewById(R.id.toolbar);

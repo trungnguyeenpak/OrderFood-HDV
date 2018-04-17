@@ -6,4 +6,7 @@
     <string name="avatart_text">T</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="ten_mon_an">Food Name</string>
+    <string name="check_connect_to_server">Check connect to server</string>
+    <string name="not_connect_network">Your device not connect to network</string>
 </resources>

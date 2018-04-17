@@ -2,13 +2,41 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp">
 
+    <ImageView
+        android:id="@+id/img_food"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/cocacola"
+        android:scaleType="fitCenter"/>
+
     <TextView
-        android:id="@+id/tvName"
-        android:layout_width="match_parent"
+        android:id="@+id/tv_food_name"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Nguyen Trug"
-        android:textSize="20sp"/>
+        android:lines="1"
+        android:text="@string/ten_mon_an"
+        android:textSize="22sp"
+        app:layout_constraintStart_toEndOf="@id/img_food"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_food_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/img_food"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_food_name"
+        android:textSize="18sp"
+        android:layout_marginStart="10dp"
+        android:text="1200000"
+        android:layout_marginTop="5dp"/>
 
 </android.support.constraint.ConstraintLayout>

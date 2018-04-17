@@ -1,6 +1,7 @@
 package com.trungnguyeen.orderfood.data.remote;
 
 import com.trungnguyeen.orderfood.data.model.response.EmployeeResponse;
+import com.trungnguyeen.orderfood.data.model.response.FoodListResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -22,4 +23,7 @@ public interface SOService {
 
     @GET("employee/{userID}.json")
     Call<EmployeeResponse> getUserInfo(@Path("userID") int userID);
+
+    @GET("food/list.json")
+    Call<FoodListResponse> getFoodList();
 }

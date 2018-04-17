@@ -5,9 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.trungnguyeen.orderfood.R;
+import com.trungnguyeen.orderfood.data.model.Food;
 
 import java.util.ArrayList;
 
@@ -17,22 +20,23 @@ import java.util.ArrayList;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
 
-    private ArrayList<String> data;
+    private Context context;
+    private ArrayList<Food> data;
 
     @Override
     public FoodAdapter.FoodViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
+        this.context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View itemView = layoutInflater.inflate(R.layout.food_recycler_item, parent, false);
 
-        return new FoodViewHolder(itemView);
+        return new FoodViewHolder(itemView, context);
     }
 
     @Override
     public void onBindViewHolder(FoodAdapter.FoodViewHolder holder, int position) {
 
-        String str = data.get(position);
-        holder.bindView(str);
+        Food item = data.get(position);
+        holder.bindView(item);
     }
 
     @Override
@@ -40,21 +44,43 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
         return data.size();
     }
 
-    public void setData(ArrayList<String> data) {
+    public void setData(ArrayList<Food> data) {
         this.data = data;
     }
 
-    public static class FoodViewHolder extends RecyclerView.ViewHolder {
+    static class FoodViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tvName;
+        private Context context;
+        private TextView fooName;
+        private TextView foodPrice;
+        private ImageView foodImage;
 
-        public FoodViewHolder(View itemView) {
+        FoodViewHolder(View itemView, Context context) {
             super(itemView);
-            tvName = (TextView) itemView.findViewById(R.id.tvName);
+            this.context = context;
+            fooName = itemView.findViewById(R.id.tv_food_name);
+            foodPrice = itemView.findViewById(R.id.tv_food_price);
+            foodImage = itemView.findViewById(R.id.img_food);
         }
 
-        public void bindView(String str) {
-            tvName.setText(str);
+        void bindView(Food food) {
+            fooName.setText(food.getName());
+            foodPrice.setText(String.format("%s VND", food.getPrice()));
+//            if (food.getImage() != "photo.png"){
+//                Glide.with(foodImage)
+//                        .load(food.getImage())
+//                        .into(foodImage);
+//                Toast.makeText(context, "photo.png", Toast.LENGTH_SHORT).show();
+//            }
+//            else{
+                Glide.with(context)
+                        .load(R.drawable.placeholder_food)
+                        .into(foodImage);
+
+//            }
+
+
+
         }
     }
 }
