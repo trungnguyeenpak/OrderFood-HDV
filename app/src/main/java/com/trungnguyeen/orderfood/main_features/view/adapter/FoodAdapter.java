@@ -1,4 +1,4 @@
-package com.trungnguyeen.orderfood.features.view.adapter;
+package com.trungnguyeen.orderfood.main_features.view.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -34,7 +34,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
     @Override
     public void onBindViewHolder(FoodAdapter.FoodViewHolder holder, int position) {
-
         Food item = data.get(position);
         holder.bindView(item);
     }

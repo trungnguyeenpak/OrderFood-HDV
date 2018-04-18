@@ -9,4 +9,6 @@
     <string name="ten_mon_an">Food Name</string>
     <string name="check_connect_to_server">Check connect to server</string>
     <string name="not_connect_network">Your device not connect to network</string>
+    <string name="food_fragment">Danh sách món ăn</string>
+    <string name="table_fragment">Danh sách bàn ăn</string>
 </resources>

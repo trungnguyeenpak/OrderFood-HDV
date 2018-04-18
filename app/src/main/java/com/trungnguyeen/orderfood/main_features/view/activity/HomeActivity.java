@@ -1,4 +1,4 @@
-package com.trungnguyeen.orderfood.features.view.activity;
+package com.trungnguyeen.orderfood.main_features.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,8 +25,8 @@ import com.trungnguyeen.orderfood.R;
 import com.trungnguyeen.orderfood.data.model.Employee;
 import com.trungnguyeen.orderfood.data.model.SingletonUser;
 import com.trungnguyeen.orderfood.design_supporter.CustomViewPager;
-import com.trungnguyeen.orderfood.features.view.fragment.FoodFragment;
-import com.trungnguyeen.orderfood.features.view.fragment.TableFragment;
+import com.trungnguyeen.orderfood.main_features.view.fragment.FoodFragment;
+import com.trungnguyeen.orderfood.main_features.view.fragment.TableFragment;
 import com.trungnguyeen.orderfood.login.view.LoginActivity;
 import com.trungnguyeen.orderfood.utils.Constants;
 
@@ -55,8 +55,6 @@ public class HomeActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        //loading the default fragment
-        //loadFragment(new FoodFragment());
         mEmployee = mUser.getEmployee();
         Log.i(TAG, "onCreate: Employee " + mEmployee.getFullName());
         setupToolbar();
@@ -103,6 +101,7 @@ public class HomeActivity extends AppCompatActivity{
 
             }
         });
+
         viewPager.setPagingEnabled(false);
     }
 
@@ -155,6 +154,12 @@ public class HomeActivity extends AppCompatActivity{
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Log.i(TAG, "onNavigationItemSelected: id " + item.getItemId());
             viewPager.setCurrentItem(item.getOrder());
+            if(viewPager.getCurrentItem() == 0){
+                mToolbar.setTitle(R.string.food_fragment);
+            }
+            else{
+                mToolbar.setTitle(R.string.table_fragment);
+            }
             return true;
         }
     };
@@ -165,7 +170,6 @@ public class HomeActivity extends AppCompatActivity{
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        mToolbar.setTitle(R.string.app_name);
     }
 
     @Override

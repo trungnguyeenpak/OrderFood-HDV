@@ -1,4 +1,4 @@
-package com.trungnguyeen.orderfood.features.view.interfaces;
+package com.trungnguyeen.orderfood.main_features.view.interfaces;
 
 import com.trungnguyeen.orderfood.data.model.Food;
 

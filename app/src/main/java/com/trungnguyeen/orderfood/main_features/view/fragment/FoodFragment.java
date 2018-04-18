@@ -1,4 +1,4 @@
-package com.trungnguyeen.orderfood.features.view.fragment;
+package com.trungnguyeen.orderfood.main_features.view.fragment;
 
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -19,9 +19,9 @@ import android.widget.Toast;
 
 import com.trungnguyeen.orderfood.R;
 import com.trungnguyeen.orderfood.data.model.Food;
-import com.trungnguyeen.orderfood.features.presenter.Presenter;
-import com.trungnguyeen.orderfood.features.view.adapter.FoodAdapter;
-import com.trungnguyeen.orderfood.features.view.interfaces.FoodViewListener;
+import com.trungnguyeen.orderfood.main_features.presenter.Presenter;
+import com.trungnguyeen.orderfood.main_features.view.adapter.FoodAdapter;
+import com.trungnguyeen.orderfood.main_features.view.interfaces.FoodViewListener;
 import com.trungnguyeen.orderfood.utils.ConnectivityChangeReceiver;
 import com.trungnguyeen.orderfood.utils.NetworkListener;
 
@@ -62,7 +62,7 @@ public class FoodFragment extends Fragment implements FoodViewListener, NetworkL
     }
 
     private void requestDataFromServer() {
-        mPresenter.requestData();
+        mPresenter.requestFoodData();
     }
 
     public void setupSwipeRefreshLayout(View view){
@@ -86,14 +86,15 @@ public class FoodFragment extends Fragment implements FoodViewListener, NetworkL
     }
 
     private void reloadRecyclerView() {
-        Toast.makeText(getContext(), "Reload RecyclerView", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Reload data", Toast.LENGTH_SHORT).show();
+        //countdown 3seconds to stop swipe layout
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 swipeRefreshLayout.setRefreshing(false);
-                mPresenter.requestData();
             }
         }, 3000);
+        mPresenter.requestFoodData();
     }
 
     @Override

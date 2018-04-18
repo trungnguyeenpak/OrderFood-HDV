@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".login.view.LoginActivity" />
-        <activity android:name=".features.view.activity.HomeActivity">
+        <activity android:name=".main_features.view.activity.HomeActivity">
 
         </activity>
     </application>

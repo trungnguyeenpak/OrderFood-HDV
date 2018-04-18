@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.trungnguyeen.orderfood.R;
 import com.trungnguyeen.orderfood.data.model.Employee;
-import com.trungnguyeen.orderfood.features.view.activity.HomeActivity;
+import com.trungnguyeen.orderfood.main_features.view.activity.HomeActivity;
 import com.trungnguyeen.orderfood.login.presenter.LoginPresenter;
 import com.trungnguyeen.orderfood.login.presenter.LoginViewListener;
 

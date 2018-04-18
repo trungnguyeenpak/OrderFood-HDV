@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="110dp"
+        android:layout_height="110dp">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="5dp"
+            app:cardPreventCornerOverlap="false"
+            card_view:cardMaxElevation="2dp"
+            card_view:cardUseCompatPadding="true">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="7dp">
+
+                <TextView
+                    android:id="@+id/table_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/radius_shap_table_item"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="30sp"
+                    android:textStyle="italic|bold"
+                    tools:text="15"/>
+
+                <TextView
+                    android:id="@+id/table_status"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/hima_table_shap"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="5dp"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>
