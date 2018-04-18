@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Main container -->
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_table_layout"
         android:layout_width="match_parent"
@@ -33,4 +34,4 @@
         android:text="@string/check_connect_to_server"
         android:visibility="gone"/>
 
-</android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>

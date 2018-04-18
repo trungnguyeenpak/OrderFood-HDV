@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * Created by trungnguyeen on 4/3/18.
  */
 
-public class TableFragment extends Fragment implements NetworkListener, TableItemClickListener, TableViewListener{
+public class TableFragment extends Fragment implements NetworkListener, TableItemClickListener, TableViewListener {
 
     //Variable for control
     private RecyclerView mRecylerViewTable;
@@ -49,14 +49,18 @@ public class TableFragment extends Fragment implements NetworkListener, TableIte
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_table, null);
         Log.i(TAG, "onCreateView: TableFragment");
+
+        //Dang ky lang nghe network
         getActivity().registerReceiver(new ConnectivityChangeReceiver(this),
                 new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+
         tableList = new ArrayList<>();
         mPresenter = new Presenter(getContext(), this);
-        requestDataFromServer();
         tvNoConnect = view.findViewById(R.id.tv_table_no_connect);
+        requestDataFromServer();
         setupRecyclerView(view);
         setupSwipeRefreshLayout(view);
+
         Log.i(TAG, "onCreateView: FoodFragment");
         return view;
     }
@@ -75,7 +79,7 @@ public class TableFragment extends Fragment implements NetworkListener, TableIte
         mPresenter.requestTableData();
     }
 
-    private void setupSwipeRefreshLayout(View view){
+    private void setupSwipeRefreshLayout(View view) {
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_table_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -98,7 +102,6 @@ public class TableFragment extends Fragment implements NetworkListener, TableIte
 
     @Override
     public void connected() {
-
     }
 
     @Override
@@ -129,5 +132,10 @@ public class TableFragment extends Fragment implements NetworkListener, TableIte
     @Override
     public void onItemClick(View view, int position) {
         Log.i("TAG", "You clicked number " + tableAdapter.getItem(position) + ", which is at cell position " + position);
+        //Init bottom sheet fragment and show it
+        BottomSheetFragment bottomSheetFragment = new BottomSheetFragment();
+        bottomSheetFragment.show(getActivity().getSupportFragmentManager(),
+                bottomSheetFragment.getTag());
+        bottomSheetFragment.setSelectedTable(tableAdapter.getItem(position));
     }
 }

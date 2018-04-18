@@ -11,4 +11,6 @@
     <string name="not_connect_network">Your device not connect to network</string>
     <string name="food_fragment">Danh sách món ăn</string>
     <string name="table_fragment">Danh sách bàn ăn</string>
+    <string name="tinh_tien">Tính tiền</string>
+    <string name="them_mon_an">Thêm món</string>
 </resources>
