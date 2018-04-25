@@ -3,11 +3,14 @@ package com.trungnguyeen.orderfood.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * Created by trungnguyeen on 4/12/18.
  */
 
-public class Food {
+public class Food implements Serializable{
 
     @SerializedName("id")
     @Expose
@@ -29,7 +32,7 @@ public class Food {
     private Category category;
     @SerializedName("photoList")
     @Expose
-    private Object photoList;
+    private List<PhotoList> photoList = null;
 
     /**
      * No args constructor for use in serialization
@@ -48,7 +51,7 @@ public class Food {
      * @param image
      * @param photoList
      */
-    public Food(Integer id, String name, String description, Double price, String image, Category category, Object photoList) {
+    public Food(Integer id, String name, String description, Double price, String image, Category category, List<PhotoList> photoList) {
         super();
         this.id = id;
         this.name = name;
@@ -107,11 +110,11 @@ public class Food {
         this.category = category;
     }
 
-    public Object getPhotoList() {
+    public List<PhotoList> getPhotoList() {
         return photoList;
     }
 
-    public void setPhotoList(Object photoList) {
+    public void setPhotoList(List<PhotoList> photoList) {
         this.photoList = photoList;
     }
 

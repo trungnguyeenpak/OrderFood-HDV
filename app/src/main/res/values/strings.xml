@@ -13,4 +13,10 @@
     <string name="table_fragment">Danh sách bàn ăn</string>
     <string name="tinh_tien">Tính tiền</string>
     <string name="them_mon_an">Thêm món</string>
+    <string name="thanh_toan_errorStr">Thanh toán không thành công</string>
+    <string name="dang_tinh_tien">Các món đã order</string>
+    <string name="ban_trong">Bàn trống - Không tính tiền</string>
+    <string name="tong_tien">Tổng tiền :  </string>
+    <string name="_1995000">1995000</string>
+    <string name="mon_order">Số món đã order:</string>
 </resources>

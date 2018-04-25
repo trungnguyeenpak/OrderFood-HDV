@@ -3,11 +3,13 @@ package com.trungnguyeen.orderfood.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by trungnguyeen on 4/18/18.
  */
 
-public class Table {
+public class Table implements Serializable {
     @SerializedName("id")
     @Expose
     private Integer id;

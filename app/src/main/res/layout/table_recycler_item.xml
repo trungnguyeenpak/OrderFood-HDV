@@ -32,9 +32,9 @@
                     android:background="@drawable/radius_shap_table_item"
                     android:gravity="center"
                     android:textColor="@color/colorWhite"
-                    android:textSize="30sp"
+                    android:textSize="24sp"
                     android:textStyle="italic|bold"
-                    tools:text="15"/>
+                    tools:text="A01"/>
 
                 <TextView
                     android:id="@+id/table_status"

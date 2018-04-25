@@ -1,4 +1,4 @@
-package com.trungnguyeen.orderfood.main_features.view.fragment;
+package com.trungnguyeen.orderfood.table_featrue.view;
 
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialogFragment;
@@ -6,10 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.trungnguyeen.orderfood.R;
-import com.trungnguyeen.orderfood.data.model.Table;
+import com.trungnguyeen.orderfood.table_featrue.view.interfaces.BottomSheetItemClick;
 
 /**
  * Created by trungnguyeen on 4/18/18.
@@ -19,14 +18,19 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
 
     private LinearLayout order_item;
     private LinearLayout tinhTien_item;
-    private Table selectedTable;
+    private int tableID;
+    private BottomSheetItemClick bottomSheetItemClick;
 
     public BottomSheetFragment() {
         // Required empty public constructor
     }
 
-    public void setSelectedTable(Table selectedTable) {
-        this.selectedTable = selectedTable;
+    public void setTableID(int tableID) {
+        this.tableID = tableID;
+    }
+
+    public void setBottomSheetItemClick(BottomSheetItemClick bottomSheetItemClick) {
+        this.bottomSheetItemClick = bottomSheetItemClick;
     }
 
     @Override
@@ -41,7 +45,6 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         View view = inflater.inflate(R.layout.bottom_sheet_dialog, container, false);
         order_item = view.findViewById(R.id.fragment_order);
         tinhTien_item = view.findViewById(R.id.fragment_tinh_tien);
-
         setEvents(view);
 
         return view;
@@ -51,17 +54,16 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         order_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Switch to activity order
-                Toast.makeText(getContext(), "Order " + selectedTable.getId(), Toast.LENGTH_SHORT).show();
-
+                //callback startactivity order
+                bottomSheetItemClick.onClickOrder(tableID);
             }
         });
 
         tinhTien_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Request tinh tien to service
-                Toast.makeText(getContext(), "Tinh tien " + selectedTable.getId(), Toast.LENGTH_SHORT).show();
+                //callback tinh tien to table activity
+                bottomSheetItemClick.onClickItemThanhToan(tableID);
             }
         });
     }

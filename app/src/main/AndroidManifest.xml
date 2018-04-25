@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.trungnguyeen.orderfood">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -21,9 +21,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".login.view.LoginActivity" />
-        <activity android:name=".main_features.view.activity.HomeActivity">
-
-        </activity>
+        <!-- <activity android:name=".main_features.view.activity.HomeActivity"></activity> -->
+        <activity android:name=".table_featrue.view.TableActivity" />
+        <activity android:name=".bill_feature.view.BillActivity"></activity>
     </application>
 
 </manifest>

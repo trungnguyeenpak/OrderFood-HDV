@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.trungnguyeen.orderfood.bill_feature.view.BillActivity">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_bill"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ToolBarTheme.ToolBarStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@android:color/white">
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/btn_thanhtoan"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Thanh Toán"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_marginEnd="15dp"/>
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_bill"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_bill"
+        app:layout_constraintBottom_toTopOf="@id/tv_tien_bill"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/tv_tien_bill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tong_tien"
+        android:textSize="22sp"
+        app:layout_constraintTop_toBottomOf="@id/recyclerview_bill"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"/>
+</android.support.constraint.ConstraintLayout>

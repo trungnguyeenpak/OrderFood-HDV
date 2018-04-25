@@ -9,9 +9,9 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.trungnguyeen.orderfood.R;
-import com.trungnguyeen.orderfood.main_features.view.activity.HomeActivity;
 import com.trungnguyeen.orderfood.login.presenter.LoginPresenter;
 import com.trungnguyeen.orderfood.login.presenter.SplashViewListener;
+import com.trungnguyeen.orderfood.table_featrue.view.TableActivity;
 import com.trungnguyeen.orderfood.utils.Constants;
 
 public class SplashscreenActivity extends AppCompatActivity implements SplashViewListener {
@@ -34,6 +34,7 @@ public class SplashscreenActivity extends AppCompatActivity implements SplashVie
 
     private void getControls() {
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+
     }
 
     @Override
@@ -48,7 +49,7 @@ public class SplashscreenActivity extends AppCompatActivity implements SplashVie
 
             }
             public void onFinish() {
-                Intent homeIntent = new Intent(SplashscreenActivity.this, HomeActivity.class);
+                Intent homeIntent = new Intent(SplashscreenActivity.this, TableActivity.class);
                 startActivity(homeIntent);
                 finish();
             }

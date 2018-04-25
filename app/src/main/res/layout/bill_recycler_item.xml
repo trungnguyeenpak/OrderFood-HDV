@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_foodname_bill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ten_mon_an"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/tv_gia_bill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Giá: 1995000"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_foodname_bill"
+        android:layout_marginTop="5dp"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guiline_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_sluong_bill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Số lượng: 2"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_foodname_bill"
+        app:layout_constraintStart_toEndOf="@id/guiline_vertical"
+        android:layout_marginTop="5dp"/>
+
+
+    <TextView
+        android:id="@+id/tv_thanhTien_bill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thành tiền: 30000 VND"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_foodname_bill"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="5dp"/>
+
+
+</android.support.constraint.ConstraintLayout>

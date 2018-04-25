@@ -4,24 +4,95 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="35dp"
     tools:context="com.trungnguyeen.orderfood.login.view.LoginActivity">
 
-    <EditText
-        android:id="@+id/userName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/userName"/>
 
-    <Button
-        android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="login"
-        app:layout_constraintTop_toBottomOf="@id/password"
+    <ImageView
+        android:id="@+id/img_app"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/image_splahscreen"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal"
+        app:layout_constraintVertical_bias="0.25"
+        app:layout_constraintHorizontal_bias="0.34"/>
+
+
+
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constrainlayoutlogin"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <EditText
+            android:hint="Username"
+            android:id="@+id/userName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shap"
+            android:textColorHint="@color/colorPrimary"
+            android:textSize="17sp"
+            android:lines="1"
+            android:textAlignment="center"/>
+
+
+        <EditText
+            android:hint="Password"
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/userName"
+            android:layout_marginTop="10dp"
+            android:lines="1"
+            android:background="@drawable/shap"
+            android:textColorHint="@color/colorPrimary"
+            android:inputType="textPassword"
+            android:textSize="17sp"
+            android:textAlignment="center"/>
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:textStyle="bold"
+            android:fontFamily="monospace"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/custom_button_radius"
+            app:layout_constraintTop_toBottomOf="@id/password"
+            android:layout_marginTop="35sp"/>
+
+        <ProgressBar
+            android:id="@+id/login_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/login"
+            android:layout_marginTop="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"/>
+
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+
 </android.support.constraint.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.trungnguyeen.orderfood.main_features.view.adapter;
+package com.trungnguyeen.orderfood.table_featrue.view;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.trungnguyeen.orderfood.R;
 import com.trungnguyeen.orderfood.data.model.Table;
-import com.trungnguyeen.orderfood.main_features.view.interfaces.TableItemClickListener;
+import com.trungnguyeen.orderfood.table_featrue.view.interfaces.TableItemClickListener;
 
 import java.util.ArrayList;
 
@@ -74,7 +74,7 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.TableViewHol
 
         //Setup data for each item view
         void bindView(Table table) {
-            tableNumber.setText(table.getId().toString());
+            tableNumber.setText(table.getName().toString());
             if(table.getStatus() == 0){ //status = 0 hima Table
                 tableStatus.setBackgroundResource(R.drawable.hima_table_shap);
             }

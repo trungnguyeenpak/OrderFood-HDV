@@ -1,4 +1,4 @@
-package com.trungnguyeen.orderfood.main_features.presenter;
+package com.trungnguyeen.orderfood.table_featrue.presenter;
 
 import com.trungnguyeen.orderfood.data.model.Table;
 
@@ -9,6 +9,6 @@ import java.util.ArrayList;
  */
 
 public interface TablePresenterListener {
-    void onSuccessResponseTableData(ArrayList<Table> foods);
-    void onFailedTableData();
+    void onSuccessResponseTableData(ArrayList<Table> tables);
+    void onFailedTableData(int errorCode);
 }

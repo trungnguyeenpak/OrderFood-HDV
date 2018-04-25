@@ -3,11 +3,13 @@ package com.trungnguyeen.orderfood.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by trungnguyeen on 4/12/18.
  */
 
-public class Category {
+public class Category implements Serializable {
 
     @SerializedName("id")
     @Expose
