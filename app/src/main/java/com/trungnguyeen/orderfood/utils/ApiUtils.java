@@ -8,7 +8,7 @@ import com.trungnguyeen.orderfood.data.remote.SOService;
  */
 
 public class ApiUtils {
-    public static final String BASE_URL = "http://192.168.7.121:8080/OrderFoodRESTful/";
+    public static final String BASE_URL = "http://192.168.1.192:8080/OrderFoodRESTful/";
 
     public static SOService getSOService() {
         return RetrofitClient.getRetrofitClient(BASE_URL).create(SOService.class);

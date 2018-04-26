@@ -25,20 +25,9 @@ public class FoodListResponse {
     @Expose
     private ArrayList<Food> data = null;
 
-    /**
-     * No args constructor for use in serialization
-     *
-     */
     public FoodListResponse() {
     }
 
-    /**
-     *
-     * @param message
-     * @param result
-     * @param status
-     * @param data
-     */
     public FoodListResponse(Boolean result, Integer status, String message, ArrayList<Food> data) {
         this.result = result;
         this.status = status;

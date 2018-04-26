@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.trungnguyeen.orderfood.R;
+import com.trungnguyeen.orderfood.data.model.Table;
 import com.trungnguyeen.orderfood.table_featrue.view.interfaces.BottomSheetItemClick;
 
 /**
@@ -18,15 +19,15 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
 
     private LinearLayout order_item;
     private LinearLayout tinhTien_item;
-    private int tableID;
+    private Table table;
     private BottomSheetItemClick bottomSheetItemClick;
 
     public BottomSheetFragment() {
         // Required empty public constructor
     }
 
-    public void setTableID(int tableID) {
-        this.tableID = tableID;
+    public void setTable(Table table) {
+        this.table = table;
     }
 
     public void setBottomSheetItemClick(BottomSheetItemClick bottomSheetItemClick) {
@@ -42,7 +43,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.bottom_sheet_dialog, container, false);
+        View view = inflater.inflate(R.layout.dialog_bottom_sheet, container, false);
         order_item = view.findViewById(R.id.fragment_order);
         tinhTien_item = view.findViewById(R.id.fragment_tinh_tien);
         setEvents(view);
@@ -55,7 +56,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
             @Override
             public void onClick(View v) {
                 //callback startactivity order
-                bottomSheetItemClick.onClickOrder(tableID);
+                bottomSheetItemClick.onClickOrder(table);
             }
         });
 
@@ -63,7 +64,8 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
             @Override
             public void onClick(View v) {
                 //callback tinh tien to table activity
-                bottomSheetItemClick.onClickItemThanhToan(tableID);
+                bottomSheetItemClick.onClickItemThanhToan(table);
+
             }
         });
     }

@@ -12,7 +12,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/cocacola"
+        android:src="@drawable/placeholder_food"
         android:scaleType="fitCenter"/>
 
     <TextView

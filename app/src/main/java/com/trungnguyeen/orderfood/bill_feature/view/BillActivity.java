@@ -109,10 +109,9 @@ public class BillActivity extends AppCompatActivity {
 
     private void setupToolbar() {
         mToolbar = findViewById(R.id.toolbar_bill);
+        mToolbar.setTitle(R.string.dang_tinh_tien);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setTitle("Các món đã gọi");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

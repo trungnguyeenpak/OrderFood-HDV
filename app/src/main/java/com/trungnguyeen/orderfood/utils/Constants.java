@@ -16,4 +16,5 @@ public class Constants {
 
     public static final int ERROR_501 = 501 ;
     public static final String ORDER = "ORDER";
+    public static final String TABLE_ID = "TABLE_ID";
 }

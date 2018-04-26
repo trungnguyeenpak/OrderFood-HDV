@@ -23,7 +23,8 @@
         <activity android:name=".login.view.LoginActivity" />
         <!-- <activity android:name=".main_features.view.activity.HomeActivity"></activity> -->
         <activity android:name=".table_featrue.view.TableActivity" />
-        <activity android:name=".bill_feature.view.BillActivity"></activity>
+        <activity android:name=".bill_feature.view.BillActivity" />
+        <activity android:name=".food_feature.view.FoodListActivity"></activity>
     </application>
 
 </manifest>

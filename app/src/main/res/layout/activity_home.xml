@@ -63,7 +63,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:background="@color/colorWhite"
-            app:headerLayout="@layout/header_navi_drawer"
+            app:headerLayout="@layout/navi_drawer_header"
             app:itemIconTint="@color/darkGray"
             app:itemTextColor="@color/darkGray"
             app:menu="@menu/navi_drawer">

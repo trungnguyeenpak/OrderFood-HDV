@@ -33,12 +33,13 @@ import com.trungnguyeen.orderfood.data.model.Employee;
 import com.trungnguyeen.orderfood.data.model.Order;
 import com.trungnguyeen.orderfood.data.model.SingletonUser;
 import com.trungnguyeen.orderfood.data.model.Table;
+import com.trungnguyeen.orderfood.food_feature.view.FoodListActivity;
 import com.trungnguyeen.orderfood.login.view.LoginActivity;
 import com.trungnguyeen.orderfood.table_featrue.presenter.Presenter;
 import com.trungnguyeen.orderfood.table_featrue.view.interfaces.BottomSheetItemClick;
-import com.trungnguyeen.orderfood.table_featrue.view.interfaces.TableItemClickListener;
 import com.trungnguyeen.orderfood.table_featrue.view.interfaces.LoadTableListener;
 import com.trungnguyeen.orderfood.table_featrue.view.interfaces.PaymentListener;
+import com.trungnguyeen.orderfood.table_featrue.view.interfaces.TableItemClickListener;
 import com.trungnguyeen.orderfood.table_featrue.view.interfaces.ThanhToanListener;
 import com.trungnguyeen.orderfood.utils.ConnectivityChangeReceiver;
 import com.trungnguyeen.orderfood.utils.Constants;
@@ -131,9 +132,9 @@ public class TableActivity extends AppCompatActivity implements NetworkListener,
 
     private void setupToolbar() {
         mToolbar = findViewById(R.id.toolbar_tableacitivy);
+        mToolbar.setTitle(R.string.ban_an);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void getUser() {
@@ -223,7 +224,7 @@ public class TableActivity extends AppCompatActivity implements NetworkListener,
         bottomSheetFragment = new BottomSheetFragment();
         bottomSheetFragment.show(getSupportFragmentManager(),
                 bottomSheetFragment.getTag());
-        bottomSheetFragment.setTableID(tableAdapter.getItem(position).getId());
+        bottomSheetFragment.setTable(tableAdapter.getItem(position));
         bottomSheetFragment.setBottomSheetItemClick(this);
     }
 
@@ -266,23 +267,12 @@ public class TableActivity extends AppCompatActivity implements NetworkListener,
     }
 
     @Override
-    public void onClickItemThanhToan(int tableId) {
+    public void onClickItemThanhToan(Table table) {
         if (bottomSheetFragment != null){
             bottomSheetFragment.dismiss();
         }
 
-        //TODO 1: Kiem tra status ban do
-        Table table = null;
-        //tim ra table co tableid trong listtable
-        for(int i = 0; i < tableList.size(); i++){
-            if(tableList.get(i).getId() == tableId){
-                table = tableList.get(i);
-                Log.i(TAG, "onClickItemThanhToan: table_status " + table.getStatus());
-                break;
-            }
-        }
-
-        //TODO 3: Nếu bàn trống, thông báo không dc tính tiền
+        //TODO 1: Nếu bàn trống, thông báo không dc tính tiền
         if(table.getStatus() == 0){ //Bàn trống chưa có ai ngồi.
             showDialogWithMessage(getResources().getString(R.string.ban_trong));
             return;
@@ -290,7 +280,7 @@ public class TableActivity extends AppCompatActivity implements NetworkListener,
 
         // TODO 2: Nếu bàn đã có người ngồi, chuyển sang màn hình chưa danh sách các món ăn.
         createDialogGoiTinhTien();
-        mPresenter.requestOrderFoodWithTableId(tableId);
+        mPresenter.requestOrderFoodWithTableId(table.getId());
         mPresenter.setTinhTienListener(this);
     }
 
@@ -307,9 +297,24 @@ public class TableActivity extends AppCompatActivity implements NetworkListener,
     }
 
     @Override
-    public void onClickOrder(int tableId) {
-        //TODO Start Order Activity
-        Toast.makeText(this, "" + tableId, Toast.LENGTH_SHORT).show();
+    public void onClickOrder(Table table) {
+
+        if (bottomSheetFragment != null){
+            bottomSheetFragment.dismiss();
+        }
+
+        //Kiem tra table_status = 0, neu ban nay dang trong thi new order and start FoodListActivity
+        //table_status = 1 thi start FoodListActivity
+        //TODO Check table_status
+        if (table.getStatus() == 0){ //ban trong
+            Toast.makeText(this, "Create order", Toast.LENGTH_SHORT).show();
+        }
+
+        //TODO tart FoodListActivity with tableid
+        //Toast.makeText(this, "" + tableId, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(TableActivity.this, FoodListActivity.class);
+        intent.putExtra(Constants.TABLE_ID, table.getId());
+        startActivity(intent);
     }
 
     public void createDialogGoiTinhTien(){
