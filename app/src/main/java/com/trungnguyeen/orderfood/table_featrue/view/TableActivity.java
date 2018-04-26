@@ -35,8 +35,10 @@ import com.trungnguyeen.orderfood.data.model.SingletonUser;
 import com.trungnguyeen.orderfood.data.model.Table;
 import com.trungnguyeen.orderfood.food_feature.view.FoodListActivity;
 import com.trungnguyeen.orderfood.login.view.LoginActivity;
+import com.trungnguyeen.orderfood.table_featrue.presenter.CreateOrderPresenter;
 import com.trungnguyeen.orderfood.table_featrue.presenter.Presenter;
 import com.trungnguyeen.orderfood.table_featrue.view.interfaces.BottomSheetItemClick;
+import com.trungnguyeen.orderfood.table_featrue.view.interfaces.CreateOrderViewListener;
 import com.trungnguyeen.orderfood.table_featrue.view.interfaces.LoadTableListener;
 import com.trungnguyeen.orderfood.table_featrue.view.interfaces.PaymentListener;
 import com.trungnguyeen.orderfood.table_featrue.view.interfaces.TableItemClickListener;
@@ -47,7 +49,7 @@ import com.trungnguyeen.orderfood.utils.NetworkListener;
 
 import java.util.ArrayList;
 
-public class TableActivity extends AppCompatActivity implements NetworkListener, TableItemClickListener, BottomSheetItemClick, LoadTableListener, PaymentListener {
+public class TableActivity extends AppCompatActivity implements NetworkListener, TableItemClickListener, BottomSheetItemClick, LoadTableListener, PaymentListener, CreateOrderViewListener {
 
     //Variable for control
     private RecyclerView mRecylerViewTable;
@@ -66,6 +68,7 @@ public class TableActivity extends AppCompatActivity implements NetworkListener,
     private TableAdapter tableAdapter;
     private ArrayList<Table> tableList;
     private Presenter mPresenter;
+    private CreateOrderPresenter mOrderPresenter;
     public final static String TAG = TableActivity.class.getSimpleName();
     private Employee mEmployee;
     private SingletonUser mUser = SingletonUser.getInstance();
@@ -85,6 +88,7 @@ public class TableActivity extends AppCompatActivity implements NetworkListener,
 
         tableList = new ArrayList<>();
         mPresenter = new Presenter(this);
+        mOrderPresenter = new CreateOrderPresenter();
         tvNoConnect = findViewById(R.id.tv_table_no_connect);
         requestDataFromServer();
         setupToolbar();
@@ -304,17 +308,16 @@ public class TableActivity extends AppCompatActivity implements NetworkListener,
         }
 
         //Kiem tra table_status = 0, neu ban nay dang trong thi new order and start FoodListActivity
-        //table_status = 1 thi start FoodListActivity
+        //table_status = 1 thi start FoodListActivity with orderid
         //TODO Check table_status
-        if (table.getStatus() == 0){ //ban trong
-            Toast.makeText(this, "Create order", Toast.LENGTH_SHORT).show();
+        if (table.getStatus() == 0){ //ban trong - create order
+            //Toast.makeText(this, "Create order", Toast.LENGTH_SHORT).show();
+            mOrderPresenter.createOrderWithTable(table);
         }
-
-        //TODO tart FoodListActivity with tableid
-        //Toast.makeText(this, "" + tableId, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(TableActivity.this, FoodListActivity.class);
-        intent.putExtra(Constants.TABLE_ID, table.getId());
-        startActivity(intent);
+        else{ // status = 1 //get order
+            mOrderPresenter.getOrderWithTable(table);
+        }
+        mOrderPresenter.setmListener(this);
     }
 
     public void createDialogGoiTinhTien(){
@@ -389,5 +392,19 @@ public class TableActivity extends AppCompatActivity implements NetworkListener,
         super.onRestart();
         Log.i(TAG, "onRestart");
         reloadRecyclerView();
+    }
+
+    @Override
+    public void returnOrderToView(Order order) {
+        //TODO tart FoodListActivity with order
+        //Toast.makeText(this, "" + tableId, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(TableActivity.this, FoodListActivity.class);
+        intent.putExtra(Constants.ORDER, order);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onFailureGetOrder(int error501) {
+        Toast.makeText(this, "Order khong thanh cong.", Toast.LENGTH_SHORT).show();
     }
 }

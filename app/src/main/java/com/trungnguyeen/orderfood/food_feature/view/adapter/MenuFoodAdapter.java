@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.trungnguyeen.orderfood.R;
 import com.trungnguyeen.orderfood.data.model.Food;
+import com.trungnguyeen.orderfood.food_feature.view.interfaces.OnLongClickFoodItem;
 
 import java.util.ArrayList;
 
@@ -22,9 +23,14 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuIt
 
     private Context context;
     private ArrayList<Food> foods;
+    private OnLongClickFoodItem mListener;
 
     public void setFoods(ArrayList<Food> foods) {
         this.foods = foods;
+    }
+
+    public void setmListener(OnLongClickFoodItem mListener) {
+        this.mListener = mListener;
     }
 
     @Override
@@ -48,7 +54,7 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuIt
     }
 
 
-    public class MenuItemViewHolder extends RecyclerView.ViewHolder{
+    public class MenuItemViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
 
         ImageView imgFood;
         TextView name;
@@ -60,6 +66,7 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuIt
             imgFood = itemView.findViewById(R.id.img_food);
             name = itemView.findViewById(R.id.tv_food_name);
             price = itemView.findViewById(R.id.tv_food_price);
+            itemView.setOnLongClickListener(this);
         }
 
         public void bindView(Food food){
@@ -68,6 +75,12 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuIt
             Glide.with(context)
                     .load(food.getImage())
                     .into(imgFood);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            mListener.onLongClick(v, getAdapterPosition(), foods.get(getAdapterPosition()));
+            return true;
         }
     }
 }

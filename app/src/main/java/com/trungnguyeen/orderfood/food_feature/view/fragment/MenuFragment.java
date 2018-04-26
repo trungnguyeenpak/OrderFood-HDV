@@ -4,17 +4,20 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.trungnguyeen.orderfood.R;
 import com.trungnguyeen.orderfood.data.model.Food;
 import com.trungnguyeen.orderfood.food_feature.presenter.MenuFoodPresenter;
 import com.trungnguyeen.orderfood.food_feature.view.adapter.MenuFoodAdapter;
+import com.trungnguyeen.orderfood.food_feature.view.interfaces.OnLongClickFoodItem;
 import com.trungnguyeen.orderfood.food_feature.view.interfaces.ShowMenuFood;
 
 import java.util.ArrayList;
@@ -23,7 +26,7 @@ import java.util.ArrayList;
  * Created by trungnguyeen on 11/2/17.
  */
 
-public class MenuFragment extends Fragment implements ShowMenuFood {
+public class MenuFragment extends Fragment implements ShowMenuFood, OnLongClickFoodItem {
 
     //Controls
     private RecyclerView mMenuRecycler;
@@ -75,7 +78,11 @@ public class MenuFragment extends Fragment implements ShowMenuFood {
         //Create adapter for recyclerview
         mMenuFoodAdapter = new MenuFoodAdapter();
         mMenuFoodAdapter.setFoods(mFoods);
+        mMenuFoodAdapter.setmListener(this);
         mMenuRecycler.setAdapter(mMenuFoodAdapter);
+        mMenuRecycler.addItemDecoration(new DividerItemDecoration(getContext(),
+                DividerItemDecoration.VERTICAL));
+
     }
 
     @Override
@@ -104,5 +111,11 @@ public class MenuFragment extends Fragment implements ShowMenuFood {
         //show status no data and hidden recycler view
         nodata.setVisibility(View.VISIBLE);
         mMenuRecycler.setVisibility(View.GONE);
+    }
+
+
+    @Override
+    public void onLongClick(View v, int position, Food food) {
+        Toast.makeText(getContext(), "Food name: " + food.getName(), Toast.LENGTH_SHORT).show();
     }
 }

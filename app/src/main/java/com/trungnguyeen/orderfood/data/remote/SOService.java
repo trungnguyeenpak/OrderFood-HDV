@@ -41,4 +41,9 @@ public interface SOService {
     @GET("order/diningTable.json")
     Call<OrderResponse> getOrderWithTableId(@Query("diningTableId") int tableid);
 
+    @FormUrlEncoded
+    @POST("order/create.json?")
+    Call<OrderResponse> createOrderWithTable(@Field("employeeId") int employeeId,
+                                             @Field("diningTableId") int diningTableId);
+
 }

@@ -18,7 +18,6 @@ public class SingletonUser {
     }
 
     public Employee getEmployee() {
-
         return employee;
     }
 
