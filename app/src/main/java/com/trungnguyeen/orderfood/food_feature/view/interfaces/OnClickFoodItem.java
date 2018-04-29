@@ -8,6 +8,6 @@ import com.trungnguyeen.orderfood.data.model.Food;
  * Created by trungnguyeen on 4/27/18.
  */
 
-public interface OnLongClickFoodItem {
-    void onLongClick(View v, int position, Food food);
+public interface OnClickFoodItem {
+    void onClick(View v, int position, Food food);
 }

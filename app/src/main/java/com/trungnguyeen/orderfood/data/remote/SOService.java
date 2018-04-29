@@ -4,9 +4,11 @@ import com.trungnguyeen.orderfood.data.model.response.BillResponse;
 import com.trungnguyeen.orderfood.data.model.response.EmployeeResponse;
 import com.trungnguyeen.orderfood.data.model.response.FoodListResponse;
 import com.trungnguyeen.orderfood.data.model.response.OrderResponse;
+import com.trungnguyeen.orderfood.data.model.response.ResultResponse;
 import com.trungnguyeen.orderfood.data.model.response.TableListResponse;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -41,9 +43,31 @@ public interface SOService {
     @GET("order/diningTable.json")
     Call<OrderResponse> getOrderWithTableId(@Query("diningTableId") int tableid);
 
+    @GET("order/{id}.json")
+    Call<OrderResponse> getOrderWithId(@Path("id") int id);
+
     @FormUrlEncoded
     @POST("order/create.json?")
     Call<OrderResponse> createOrderWithTable(@Field("employeeId") int employeeId,
                                              @Field("diningTableId") int diningTableId);
+
+    @FormUrlEncoded
+    @POST("order/{orderId}/detail/add.json?")
+    Call<ResultResponse> addFood(@Path("orderId") int orderId,
+                                 @Field("foodId") int foodId,
+                                 @Field("quantity") int quantity);
+
+
+
+    @PUT("order/{orderId}/detail/{orderDetailId}/update.json")
+    Call<ResultResponse> updateOrderDetailId(@Path("orderId") int orderId,
+                                                @Path("orderDetailId") int orderDetailId,
+                                                @Query("foodId") int foodId,
+                                                @Query("quantity")int quantity);
+
+
+
+    @DELETE("/order/detail/delete.json")
+    Call<ResultResponse> deleteFoodInOrder(@Query("id") int orderDetailId);
 
 }

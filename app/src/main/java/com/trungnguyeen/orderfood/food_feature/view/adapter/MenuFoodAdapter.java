@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.trungnguyeen.orderfood.R;
 import com.trungnguyeen.orderfood.data.model.Food;
-import com.trungnguyeen.orderfood.food_feature.view.interfaces.OnLongClickFoodItem;
+import com.trungnguyeen.orderfood.food_feature.view.interfaces.OnClickFoodItem;
 
 import java.util.ArrayList;
 
@@ -23,13 +23,13 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuIt
 
     private Context context;
     private ArrayList<Food> foods;
-    private OnLongClickFoodItem mListener;
+    private OnClickFoodItem mListener;
 
     public void setFoods(ArrayList<Food> foods) {
         this.foods = foods;
     }
 
-    public void setmListener(OnLongClickFoodItem mListener) {
+    public void setmListener(OnClickFoodItem mListener) {
         this.mListener = mListener;
     }
 
@@ -54,7 +54,7 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuIt
     }
 
 
-    public class MenuItemViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
+    public class MenuItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView imgFood;
         TextView name;
@@ -66,7 +66,7 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuIt
             imgFood = itemView.findViewById(R.id.img_food);
             name = itemView.findViewById(R.id.tv_food_name);
             price = itemView.findViewById(R.id.tv_food_price);
-            itemView.setOnLongClickListener(this);
+            itemView.setOnClickListener(this);
         }
 
         public void bindView(Food food){
@@ -78,9 +78,8 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuIt
         }
 
         @Override
-        public boolean onLongClick(View v) {
-            mListener.onLongClick(v, getAdapterPosition(), foods.get(getAdapterPosition()));
-            return true;
+        public void onClick(View v) {
+            mListener.onClick(v, getAdapterPosition(), foods.get(getAdapterPosition()));
         }
     }
 }

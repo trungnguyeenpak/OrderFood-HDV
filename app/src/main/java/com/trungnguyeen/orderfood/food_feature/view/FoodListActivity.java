@@ -21,6 +21,8 @@ public class FoodListActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private Order mOrder;
 
+    String TABFRAGMENTORDER;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +44,9 @@ public class FoodListActivity extends AppCompatActivity {
         //setup mTablayout vs mViewPager
         mTablayout.setupWithViewPager(mViewPager);
         //khoi dong adapter
-        mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+        MyPagerAdapter pagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
+        pagerAdapter.setOrder(this.mOrder);
+        mViewPager.setAdapter(pagerAdapter);
     }
 
     private void setupToolbar() {
@@ -63,5 +67,13 @@ public class FoodListActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    public String getTABFRAGMENTORDER() {
+        return TABFRAGMENTORDER;
+    }
+
+    public void setTABFRAGMENTORDER(String TABFRAGMENTORDER) {
+        this.TABFRAGMENTORDER = TABFRAGMENTORDER;
     }
 }
